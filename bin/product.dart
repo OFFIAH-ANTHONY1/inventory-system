@@ -1,9 +1,9 @@
-abstract class product {
+abstract class Product {
   int id;
   String name;
   double price;
 
-  product({required this.id, required this.name, required this.price});
+  Product(this.id, this.name, this.price);
 
   String getInfo();
 }

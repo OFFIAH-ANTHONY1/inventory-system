@@ -37,13 +37,13 @@ void addProduct() {
   }
 
   print("Enter price: ");
-  String? inputPrice = stdin.readLineSync();
+  String inputPrice = stdin.readLineSync()!;
   if (inputPrice == null || inputPrice.isEmpty) {
     print("Please enter product price!");
   }
 
-  String? name = inputName;
-  double? price = double.tryParse(inputPrice);
+  String name = inputName!;
+  double price = double.tryParse(inputPrice)!;
 
   switch (choice) {
     case "1":
@@ -53,7 +53,7 @@ void addProduct() {
         print("Invalid input");
       }
 
-      String? author = inputAuthor;
+      String author = inputAuthor!;
 
       var book = Book(0, name, price, author);
       break;
@@ -63,6 +63,10 @@ void addProduct() {
       if (inputBrand == null || inputBrand.isEmpty) {
         print("Invalid input");
       }
+
+      String brand = inputBrand!;
+
+      var electronics = Electronics(0, name, price, brand);
       break;
   }
 }

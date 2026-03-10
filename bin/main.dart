@@ -14,7 +14,7 @@ void displayMenu() {
   print("4. Delete product");
   print("Exit");
   print("");
-  stdout.write('Choose an option (1-6): ');
+  stdout.write('Choose an option (1-4): ');
 }
 
 void addProduct() {
@@ -56,6 +56,7 @@ void addProduct() {
       String author = inputAuthor!;
 
       var book = Book(0, name, price, author);
+      print("Book: $book");
       break;
     case "2":
       print("Enter brand: ");
@@ -67,11 +68,28 @@ void addProduct() {
       String brand = inputBrand!;
 
       var electronics = Electronics(0, name, price, brand);
+      print("Electronics : $electronics");
       break;
   }
 }
 
 void main() {
   displayMenu();
-  String selected = stdin.readLineSync()!;
+  String? selected = stdin.readLineSync();
+  if (selected == null || selected.isEmpty) {
+    print("Error: Invalid input!");
+  }
+
+  if (selected == "1") {
+    addProduct();
+    print("Product added successfully");
+  } else if (selected == "2") {
+    print("view products added.");
+    inventoryManager manager = inventoryManager();
+    manager.viewProduct();
+  } else if (selected == "3") {
+  } else if (selected == "4") {
+  } else {
+    print("invalid input!");
+  }
 }

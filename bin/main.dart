@@ -1,8 +1,7 @@
 import "dart:io";
 import "book.dart";
-import "product.dart";
-import "book.dart";
 import "electronics.dart";
+import "product.dart";
 import "inventory-mg.dart";
 
 void displayMenu() {
@@ -24,6 +23,8 @@ void addProduct() {
   print("1. Book");
   print("1.. Electronics");
 
+  InventoryManager manager = InventoryManager();
+
   String? choice = stdin.readLineSync();
 
   if (choice != "1" && choice != "2") {
@@ -38,7 +39,7 @@ void addProduct() {
 
   print("Enter price: ");
   String inputPrice = stdin.readLineSync()!;
-  if (inputPrice == null || inputPrice.isEmpty) {
+  if (inputPrice.isEmpty) {
     print("Please enter product price!");
   }
 
@@ -55,7 +56,8 @@ void addProduct() {
 
       String author = inputAuthor!;
 
-      var book = Book(0, name, price, author);
+      Book book = Book(0, name, price, author);
+      manager.addProduct(book);
       print("Book: $book");
       break;
     case "2":
@@ -67,13 +69,16 @@ void addProduct() {
 
       String brand = inputBrand!;
 
-      var electronics = Electronics(0, name, price, brand);
+      Electronics electronics = Electronics(0, name, price, brand);
+      manager.addProduct(electronics);
       print("Electronics : $electronics");
       break;
   }
 }
 
 void main() {
+  InventoryManager manager = InventoryManager();
+
   displayMenu();
   String? selected = stdin.readLineSync();
   if (selected == null || selected.isEmpty) {
@@ -85,10 +90,11 @@ void main() {
     print("Product added successfully");
   } else if (selected == "2") {
     print("view products added.");
-    inventoryManager manager = inventoryManager();
     manager.viewProduct();
   } else if (selected == "3") {
+    manager.updateProduct();
   } else if (selected == "4") {
+    manager.deleteProduct();
   } else {
     print("invalid input!");
   }
